@@ -1,0 +1,754 @@
+import React, { useState } from ‘react’;
+import { ShoppingCart, Heart, Search, Menu, X, Star, Instagram, Facebook, MessageCircle, Mail, MapPin, Phone, ChevronRight, Filter } from ‘lucide-react’;
+
+const LunaAccessories = () => {
+const [currentPage, setCurrentPage] = useState(‘home’);
+const [menuOpen, setMenuOpen] = useState(false);
+const [cartCount, setCartCount] = useState(0);
+const [favorites, setFavorites] = useState([]);
+const [selectedProduct, setSelectedProduct] = useState(null);
+
+const products = [
+{
+id: 1,
+name: ‘خاتم روز جولد’,
+price: 150,
+category: ‘rings’,
+image: ‘https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=400&fit=crop’,
+rating: 5,
+bestseller: true,
+description: ‘خاتم عصري من الروز جولد، تصميم أنيق ومريح للارتداء اليومي’,
+material: ‘روز جولد مطلي’,
+reviews: 127
+},
+{
+id: 2,
+name: ‘سوار ذهبي ناعم’,
+price: 200,
+category: ‘bracelets’,
+image: ‘https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop’,
+rating: 5,
+bestseller: true,
+description: ‘سوار ذهبي بتصميم ناعم وأنيق، مثالي للإطلالات الراقية’,
+material: ‘ذهب مطلي 18 قيراط’,
+reviews: 203
+},
+{
+id: 3,
+name: ‘سلسلة قلب’,
+price: 180,
+category: ‘necklaces’,
+image: ‘https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop’,
+rating: 4,
+bestseller: false,
+description: ‘سلسلة رقيقة مع قلب صغير، هدية مثالية للأحباب’,
+material: ‘فضة إسترليني’,
+reviews: 89
+},
+{
+id: 4,
+name: ‘أقراط كريستال’,
+price: 120,
+category: ‘earrings’,
+image: ‘https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop’,
+rating: 5,
+bestseller: true,
+description: ‘أقراط بأحجار الكريستال البراقة، تضيف لمسة من الأناقة’,
+material: ‘كريستال نمساوي’,
+reviews: 156
+},
+{
+id: 5,
+name: ‘طقم كامل فخم’,
+price: 450,
+category: ‘sets’,
+image: ‘https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop’,
+rating: 5,
+bestseller: false,
+description: ‘طقم كامل يشمل سلسلة، أقراط وسوار بتصميم متناسق’,
+material: ‘ذهب وردي مطلي’,
+reviews: 64
+},
+{
+id: 6,
+name: ‘خاتم فضي عصري’,
+price: 130,
+category: ‘rings’,
+image: ‘https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=400&h=400&fit=crop’,
+rating: 4,
+bestseller: false,
+description: ‘خاتم فضي بتصميم عصري جريء، مثالي للإطلالات الكاجوال’,
+material: ‘فضة إسترليني 925’,
+reviews: 92
+},
+{
+id: 7,
+name: ‘سوار لؤلؤ’,
+price: 220,
+category: ‘bracelets’,
+image: ‘https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=400&h=400&fit=crop’,
+rating: 5,
+bestseller: true,
+description: ‘سوار كلاسيكي من اللؤلؤ الصناعي عالي الجودة’,
+material: ‘لؤلؤ صناعي’,
+reviews: 178
+},
+{
+id: 8,
+name: ‘سلسلة طويلة’,
+price: 160,
+category: ‘necklaces’,
+image: ‘https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=400&h=400&fit=crop’,
+rating: 4,
+bestseller: false,
+description: ‘سلسلة طويلة أنيقة، يمكن ارتداؤها بطرق متعددة’,
+material: ‘ستانلس ستيل’,
+reviews: 71
+},
+];
+
+const categories = [
+{ id: ‘rings’, name: ‘خواتم’, icon: ‘💍’ },
+{ id: ‘bracelets’, name: ‘أساور’, icon: ‘📿’ },
+{ id: ‘necklaces’, name: ‘سلاسل’, icon: ‘⛓️’ },
+{ id: ‘earrings’, name: ‘أقراط’, icon: ‘💎’ },
+{ id: ‘sets’, name: ‘أطقم’, icon: ‘🎁’ },
+];
+
+const toggleFavorite = (id) => {
+setFavorites(prev =>
+prev.includes(id) ? prev.filter(f => f !== id) : […prev, id]
+);
+};
+
+const addToCart = () => {
+setCartCount(prev => prev + 1);
+};
+
+const HomePage = () => (
+<div>
+{/* Hero Section */}
+<div className="relative bg-gradient-to-br from-pink-100 via-rose-50 to-amber-50 py-20 px-6 text-center overflow-hidden">
+<div className="absolute top-0 left-0 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+<div className=“absolute bottom-0 right-0 w-64 h-64 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse” style={{animationDelay: ‘1s’}}></div>
+
+```
+    <div className="relative z-10 max-w-4xl mx-auto">
+      <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
+        مرحبا بك فـ <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-amber-400">Luna Accessories</span> 💖
+      </h1>
+      <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+        المكان فين كتلقاي أجمل وأحدث إكسسوارات البنات ✨<br/>
+        من تصاميم عصرية وبسيطة، حتى لقطع فخمة وجريئة
+      </p>
+      <div className="flex gap-4 justify-center flex-wrap">
+        <button 
+          onClick={() => setCurrentPage('shop')}
+          className="bg-gradient-to-r from-pink-400 to-rose-400 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all"
+        >
+          🛍️ تسوقي الآن
+        </button>
+        <button className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold border-2 border-pink-200 hover:bg-pink-50 transition-all">
+          ✨ اكتشفي المزيد
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* Features */}
+  <div className="py-12 bg-white">
+    <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-6 text-center">
+      <div className="p-6 hover:shadow-lg rounded-xl transition-all">
+        <div className="text-4xl mb-3">🛍️</div>
+        <h3 className="font-bold text-gray-800 mb-2">تسوق بسهولة</h3>
+        <p className="text-gray-600 text-sm">واجهة بسيطة وسهلة</p>
+      </div>
+      <div className="p-6 hover:shadow-lg rounded-xl transition-all">
+        <div className="text-4xl mb-3">🚚</div>
+        <h3 className="font-bold text-gray-800 mb-2">توصيل سريع</h3>
+        <p className="text-gray-600 text-sm">لجميع المدن</p>
+      </div>
+      <div className="p-6 hover:shadow-lg rounded-xl transition-all">
+        <div className="text-4xl mb-3">💳</div>
+        <h3 className="font-bold text-gray-800 mb-2">أداء آمن</h3>
+        <p className="text-gray-600 text-sm">حماية معلوماتك</p>
+      </div>
+      <div className="p-6 hover:shadow-lg rounded-xl transition-all">
+        <div className="text-4xl mb-3">💎</div>
+        <h3 className="font-bold text-gray-800 mb-2">جودة عالية</h3>
+        <p className="text-gray-600 text-sm">منتجات مختارة</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Bestsellers */}
+  <div className="py-16 bg-gradient-to-b from-white to-pink-50">
+    <div className="max-w-6xl mx-auto px-6">
+      <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+        الأكثر مبيعاً 🌟
+      </h2>
+      <div className="grid md:grid-cols-4 gap-6">
+        {products.filter(p => p.bestseller).map(product => (
+          <div key={product.id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden group cursor-pointer">
+            <div 
+              onClick={() => {setSelectedProduct(product); setCurrentPage('product');}}
+              className="relative h-64 overflow-hidden"
+            >
+              <img 
+                src={product.image} 
+                alt={product.name}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+              <button 
+                onClick={(e) => {e.stopPropagation(); toggleFavorite(product.id);}}
+                className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-all z-10"
+              >
+                <Heart className={`w-5 h-5 ${favorites.includes(product.id) ? 'fill-red-400 text-red-400' : 'text-gray-400'}`} />
+              </button>
+            </div>
+            <div className="p-4">
+              <h3 className="font-bold text-gray-800 mb-2">{product.name}</h3>
+              <div className="flex items-center gap-1 mb-2">
+                {[...Array(product.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                ))}
+                <span className="text-xs text-gray-500 mr-1">({product.reviews})</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-2xl font-bold text-pink-500">{product.price} DH</span>
+                <button 
+                  onClick={(e) => {e.stopPropagation(); addToCart();}}
+                  className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-2 rounded-lg hover:shadow-md transition-all"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="text-center mt-10">
+        <button 
+          onClick={() => setCurrentPage('shop')}
+          className="bg-gray-800 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-700 transition-all inline-flex items-center gap-2"
+        >
+          شوفي المزيد <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* Categories */}
+  <div className="py-16 bg-white">
+    <div className="max-w-6xl mx-auto px-6">
+      <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+        تسوقي حسب الفئة 💎
+      </h2>
+      <div className="grid md:grid-cols-5 gap-6">
+        {categories.map(cat => (
+          <button 
+            key={cat.id}
+            onClick={() => setCurrentPage('shop')}
+            className="bg-gradient-to-br from-pink-50 to-rose-50 p-8 rounded-2xl hover:shadow-xl transition-all transform hover:scale-105 text-center border-2 border-transparent hover:border-pink-200"
+          >
+            <div className="text-5xl mb-3">{cat.icon}</div>
+            <h3 className="font-bold text-gray-800">{cat.name}</h3>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+);
+
+const ShopPage = () => (
+<div className="py-12 bg-gray-50 min-h-screen">
+<div className="max-w-6xl mx-auto px-6">
+<div className="flex justify-between items-center mb-8">
+<h2 className="text-3xl font-bold text-gray-800">المتجر 🛍️</h2>
+<button className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all">
+<Filter className="w-5 h-5" />
+فلترة
+</button>
+</div>
+
+```
+    <div className="grid md:grid-cols-4 gap-6">
+      {products.map(product => (
+        <div key={product.id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden cursor-pointer">
+          <div 
+            onClick={() => {setSelectedProduct(product); setCurrentPage('product');}}
+            className="relative h-64 overflow-hidden group"
+          >
+            <img 
+              src={product.image} 
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+            {product.bestseller && (
+              <div className="absolute top-3 left-3 bg-amber-400 text-white px-3 py-1 rounded-full text-xs font-bold">
+                الأكثر مبيعاً
+              </div>
+            )}
+            <button 
+              onClick={(e) => {e.stopPropagation(); toggleFavorite(product.id);}}
+              className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-all z-10"
+            >
+              <Heart className={`w-5 h-5 ${favorites.includes(product.id) ? 'fill-red-400 text-red-400' : 'text-gray-400'}`} />
+            </button>
+          </div>
+          <div className="p-4">
+            <h3 className="font-bold text-gray-800 mb-2">{product.name}</h3>
+            <div className="flex items-center gap-1 mb-2">
+              {[...Array(product.rating)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+              ))}
+              <span className="text-xs text-gray-500 mr-1">({product.reviews})</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-2xl font-bold text-pink-500">{product.price} DH</span>
+              <button 
+                onClick={(e) => {e.stopPropagation(); addToCart();}}
+                className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-2 rounded-lg hover:shadow-md transition-all"
+              >
+                <ShoppingCart className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+```
+
+);
+
+const AboutPage = () => (
+<div className="py-16 bg-white">
+<div className="max-w-4xl mx-auto px-6">
+<h2 className="text-4xl font-bold text-center mb-8 text-gray-800">من نحن 💕</h2>
+<div className="bg-gradient-to-br from-pink-50 to-rose-50 p-10 rounded-3xl shadow-lg">
+<p className="text-lg text-gray-700 leading-relaxed mb-6">
+<strong>Luna Accessories</strong> مشروع بناتي طموح، تزاد من حب الإكسسوارات والرغبة فإعطاء كل بنت الفرصة باش تتألق بطريقتها الخاصة 💕
+</p>
+<p className="text-lg text-gray-700 leading-relaxed mb-8">
+كنآمنو أن الإكسسوارات ماشي غير زينة، ولكن تعبير على الشخصية والأسلوب.
+</p>
+
+```
+      <div className="grid md:grid-cols-3 gap-6 mt-10">
+        <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+          <div className="text-4xl mb-3">✨</div>
+          <h3 className="font-bold text-gray-800 mb-2">جودة عالية</h3>
+          <p className="text-gray-600 text-sm">منتجات مختارة بعناية</p>
+        </div>
+        <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+          <div className="text-4xl mb-3">🌷</div>
+          <h3 className="font-bold text-gray-800 mb-2">تصاميم عصرية</h3>
+          <p className="text-gray-600 text-sm">مواكبة لأحدث الترندات</p>
+        </div>
+        <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+          <div className="text-4xl mb-3">💖</div>
+          <h3 className="font-bold text-gray-800 mb-2">خدمة مميزة</h3>
+          <p className="text-gray-600 text-sm">سريعة ومتجاوبة</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+);
+
+const ProductPage = () => {
+if (!selectedProduct) return null;
+
+```
+const relatedProducts = products
+  .filter(p => p.category === selectedProduct.category && p.id !== selectedProduct.id)
+  .slice(0, 4);
+
+const customerReviews = [
+  { name: 'سارة', rating: 5, comment: 'منتج رائع! جودة عالية وتصميم أنيق جداً 💕', date: 'قبل 3 أيام' },
+  { name: 'ليلى', rating: 5, comment: 'حبيتها بزاف، وصلتني بسرعة والتغليف فاخر', date: 'قبل أسبوع' },
+  { name: 'نور', rating: 4, comment: 'جميلة ومريحة، ننصح بها ✨', date: 'قبل أسبوعين' },
+];
+
+return (
+  <div className="py-12 bg-white min-h-screen">
+    <div className="max-w-6xl mx-auto px-6">
+      <button 
+        onClick={() => setCurrentPage('shop')}
+        className="flex items-center gap-2 text-gray-600 hover:text-pink-500 mb-8 transition-all"
+      >
+        <ChevronRight className="w-5 h-5" />
+        رجوع للمتجر
+      </button>
+
+      <div className="grid md:grid-cols-2 gap-12 mb-16">
+        {/* Product Images */}
+        <div>
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-4 group">
+            <img 
+              src={selectedProduct.image} 
+              alt={selectedProduct.name}
+              className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <button 
+              onClick={() => toggleFavorite(selectedProduct.id)}
+              className="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg hover:scale-110 transition-all"
+            >
+              <Heart className={`w-6 h-6 ${favorites.includes(selectedProduct.id) ? 'fill-red-400 text-red-400' : 'text-gray-400'}`} />
+            </button>
+          </div>
+          <div className="grid grid-cols-4 gap-3">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="rounded-lg overflow-hidden border-2 border-gray-200 hover:border-pink-300 cursor-pointer transition-all">
+                <img 
+                  src={selectedProduct.image} 
+                  alt={`صورة ${i}`}
+                  className="w-full h-20 object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Product Details */}
+        <div>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">{selectedProduct.name}</h1>
+          
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-1">
+              {[...Array(selectedProduct.rating)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <span className="text-gray-600">({selectedProduct.reviews} تقييم)</span>
+          </div>
+
+          <div className="text-4xl font-bold text-pink-500 mb-6">{selectedProduct.price} DH</div>
+
+          <div className="bg-pink-50 p-6 rounded-2xl mb-6">
+            <h3 className="font-bold text-gray-800 mb-3">📝 الوصف</h3>
+            <p className="text-gray-700 leading-relaxed">{selectedProduct.description}</p>
+          </div>
+
+          <div className="bg-amber-50 p-6 rounded-2xl mb-8">
+            <h3 className="font-bold text-gray-800 mb-3">✨ المواصفات</h3>
+            <div className="space-y-2 text-gray-700">
+              <p><strong>المادة:</strong> {selectedProduct.material}</p>
+              <p><strong>الفئة:</strong> {categories.find(c => c.id === selectedProduct.category)?.name}</p>
+              <p><strong>التقييم:</strong> {selectedProduct.rating}/5 نجوم</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <button 
+              onClick={addToCart}
+              className="flex-1 bg-gradient-to-r from-pink-400 to-rose-400 text-white py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+            >
+              <ShoppingCart className="w-6 h-6" />
+              إضافة للسلة
+            </button>
+            <button className="bg-gray-800 text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-700 transition-all">
+              شراء الآن
+            </button>
+          </div>
+
+          <div className="mt-8 grid grid-cols-3 gap-4 text-center">
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="text-2xl mb-2">🚚</div>
+              <p className="text-sm text-gray-600 font-semibold">توصيل سريع</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="text-2xl mb-2">🔄</div>
+              <p className="text-sm text-gray-600 font-semibold">إرجاع مجاني</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="text-2xl mb-2">💎</div>
+              <p className="text-sm text-gray-600 font-semibold">جودة مضمونة</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Customer Reviews */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-bold text-gray-800 mb-8">آراء العملاء 💬</h2>
+        <div className="space-y-4">
+          {customerReviews.map((review, idx) => (
+            <div key={idx} className="bg-gray-50 p-6 rounded-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h4 className="font-bold text-gray-800">{review.name}</h4>
+                  <div className="flex items-center gap-1 mt-1">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                </div>
+                <span className="text-sm text-gray-500">{review.date}</span>
+              </div>
+              <p className="text-gray-700">{review.comment}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <div>
+          <h2 className="text-3xl font-bold text-gray-800 mb-8">منتجات مشابهة ✨</h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {relatedProducts.map(product => (
+              <div 
+                key={product.id} 
+                onClick={() => {setSelectedProduct(product); window.scrollTo(0, 0);}}
+                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden cursor-pointer"
+              >
+                <div className="relative h-48 overflow-hidden group">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-gray-800 mb-2">{product.name}</h3>
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(product.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="text-xl font-bold text-pink-500">{product.price} DH</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+);
+```
+
+};
+<div className="py-16 bg-gradient-to-b from-pink-50 to-white">
+<div className="max-w-4xl mx-auto px-6">
+<h2 className="text-4xl font-bold text-center mb-12 text-gray-800">تواصلي معنا 📱</h2>
+
+```
+    <div className="grid md:grid-cols-2 gap-8">
+      <div className="bg-white p-8 rounded-3xl shadow-lg">
+        <h3 className="text-2xl font-bold mb-6 text-gray-800">معلومات التواصل</h3>
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="bg-green-100 p-3 rounded-full">
+              <MessageCircle className="w-6 h-6 text-green-600" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800">واتساب</p>
+              <p className="text-gray-600">+212 XXX-XXXXXX</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-pink-100 p-3 rounded-full">
+              <Instagram className="w-6 h-6 text-pink-600" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800">إنستغرام</p>
+              <p className="text-gray-600">@luna.accessories</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-blue-100 p-3 rounded-full">
+              <Facebook className="w-6 h-6 text-blue-600" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800">فيسبوك</p>
+              <p className="text-gray-600">Luna Accessories</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-amber-100 p-3 rounded-full">
+              <Mail className="w-6 h-6 text-amber-600" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800">البريد</p>
+              <p className="text-gray-600">contact@luna.ma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-8 rounded-3xl shadow-lg">
+        <h3 className="text-2xl font-bold mb-6 text-gray-800">راسلينا</h3>
+        <form className="space-y-4">
+          <input 
+            type="text" 
+            placeholder="الاسم الكامل" 
+            className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-pink-300 outline-none transition-all"
+          />
+          <input 
+            type="email" 
+            placeholder="البريد الإلكتروني" 
+            className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-pink-300 outline-none transition-all"
+          />
+          <textarea 
+            placeholder="رسالتك..." 
+            rows="4"
+            className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-pink-300 outline-none transition-all"
+          ></textarea>
+          <button className="w-full bg-gradient-to-r from-pink-400 to-rose-400 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all">
+            إرسال الرسالة 💌
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+);
+
+return (
+<div className="min-h-screen bg-white font-sans" dir="rtl">
+{/* Header */}
+<header className="bg-white shadow-md sticky top-0 z-50">
+<div className="max-w-7xl mx-auto px-6 py-4">
+<div className="flex justify-between items-center">
+<div className=“text-2xl font-bold bg-gradient-to-r from-pink-400 to-amber-400 bg-clip-text text-transparent cursor-pointer” onClick={() => setCurrentPage(‘home’)}>
+🌙 Luna Accessories
+</div>
+
+```
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex gap-8">
+          <button onClick={() => setCurrentPage('home')} className={`font-semibold transition-all ${currentPage === 'home' ? 'text-pink-500' : 'text-gray-600 hover:text-pink-400'}`}>
+            الرئيسية
+          </button>
+          <button onClick={() => setCurrentPage('shop')} className={`font-semibold transition-all ${currentPage === 'shop' ? 'text-pink-500' : 'text-gray-600 hover:text-pink-400'}`}>
+            المتجر
+          </button>
+          <button onClick={() => setCurrentPage('about')} className={`font-semibold transition-all ${currentPage === 'about' ? 'text-pink-500' : 'text-gray-600 hover:text-pink-400'}`}>
+            من نحن
+          </button>
+          <button onClick={() => setCurrentPage('contact')} className={`font-semibold transition-all ${currentPage === 'contact' ? 'text-pink-500' : 'text-gray-600 hover:text-pink-400'}`}>
+            تواصل معنا
+          </button>
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <button className="hover:text-pink-400 transition-all">
+            <Search className="w-6 h-6" />
+          </button>
+          <button className="hover:text-pink-400 transition-all relative">
+            <Heart className="w-6 h-6" />
+            {favorites.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                {favorites.length}
+              </span>
+            )}
+          </button>
+          <button className="hover:text-pink-400 transition-all relative">
+            <ShoppingCart className="w-6 h-6" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <nav className="md:hidden mt-4 pb-4 space-y-3">
+          <button onClick={() => {setCurrentPage('home'); setMenuOpen(false);}} className="block w-full text-right font-semibold text-gray-700 hover:text-pink-400">
+            الرئيسية
+          </button>
+          <button onClick={() => {setCurrentPage('shop'); setMenuOpen(false);}} className="block w-full text-right font-semibold text-gray-700 hover:text-pink-400">
+            المتجر
+          </button>
+          <button onClick={() => {setCurrentPage('about'); setMenuOpen(false);}} className="block w-full text-right font-semibold text-gray-700 hover:text-pink-400">
+            من نحن
+          </button>
+          <button onClick={() => {setCurrentPage('contact'); setMenuOpen(false);}} className="block w-full text-right font-semibold text-gray-700 hover:text-pink-400">
+            تواصل معنا
+          </button>
+        </nav>
+      )}
+    </div>
+  </header>
+
+  {/* Main Content */}
+  <main>
+    {currentPage === 'home' && <HomePage />}
+    {currentPage === 'shop' && <ShopPage />}
+    {currentPage === 'about' && <AboutPage />}
+    {currentPage === 'contact' && <ContactPage />}
+    {currentPage === 'product' && <ProductPage />}
+  </main>
+
+  {/* Footer */}
+  <footer className="bg-gray-900 text-white py-12">
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 className="text-xl font-bold mb-4 text-pink-400">🌙 Luna Accessories</h3>
+          <p className="text-gray-400 text-sm">
+            إكسسوارات تزيدك تألق ✨
+          </p>
+        </div>
+        <div>
+          <h4 className="font-bold mb-4">روابط سريعة</h4>
+          <ul className="space-y-2 text-gray-400 text-sm">
+            <li><button onClick={() => setCurrentPage('home')} className="hover:text-pink-400 transition-all">الرئيسية</button></li>
+            <li><button onClick={() => setCurrentPage('shop')} className="hover:text-pink-400 transition-all">المتجر</button></li>
+            <li><button onClick={() => setCurrentPage('about')} className="hover:text-pink-400 transition-all">من نحن</button></li>
+            <li><button onClick={() => setCurrentPage('contact')} className="hover:text-pink-400 transition-all">تواصل معنا</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold mb-4">خدماتنا</h4>
+          <ul className="space-y-2 text-gray-400 text-sm">
+            <li>🚚 توصيل سريع</li>
+            <li>💳 أداء آمن</li>
+            <li>🔄 إرجاع واستبدال</li>
+            <li>🎁 تغليف فاخر</li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold mb-4">تابعينا</h4>
+          <div className="flex gap-3">
+            <button className="bg-pink-600 p-3 rounded-full hover:bg-pink-500 transition-all">
+              <Instagram className="w-5 h-5" />
+            </button>
+            <button className="bg-blue-600 p-3 rounded-full hover:bg-blue-500 transition-all">
+              <Facebook className="w-5 h-5" />
+            </button>
+            <button className="bg-green-600 p-3 rounded-full hover:bg-green-500 transition-all">
+              <MessageCircle className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+        <p>© 2024 Luna Accessories. كل الحقوق محفوظة 💖</p>
+      </div>
+    </div>
+  </footer>
+</div>
+```
+
+);
+};
+
+export default LunaAccessories;
